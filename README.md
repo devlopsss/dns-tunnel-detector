@@ -1,4 +1,101 @@
 
+# DNS Tunnel Detector — ML-based DNS Exfiltration/DGA Detection (Syslog-ready)
+
+A lightweight tool that detects suspicious DNS behavior (exfiltration, DGA) from **queried domain names (qnames)**.
+
+Two usage modes:
+- **Offline** — CSV `label,qname` → feature extraction → supervised training (RandomForest) → predictions → optional Syslog alerts (batch)
+- **Real time** — sniff UDP/53 (Scapy) → score each query → **RFC5424 Syslog** alerts (UDP/TCP) to a SIEM
+
+By default, alerts are concise and easy to parse:  
+`DNS alert || proba=0.913 || qname=example.com`  
+A **full** mode adds investigative features (entropy, length, character ratios) into Structured-Data.
+
+---
+
+## Why this is useful
+
+- **Privacy-friendly**: operates on domain names, not payloads
+- **SIEM-ready**: emits RFC5424 Syslog (UDP or TCP)
+- **Reproducible & educational**: end-to-end ML pipeline with commented code and docs
+- **Minimal dependencies**: `scapy`, `scikit-learn`, `pandas`, `numpy`, `joblib`
+
+---
+
+## Repository structure
+
+dns-tunnel-detector/
+├─ scripts/
+│ ├─ prepare_features.py # CSV -> features
+│ ├─ train_supervised.py # features -> model/scaler
+│ ├─ predict_supervised.py # test.csv -> predictions.csv
+│ ├─ evaluate_supervised.py # evaluate if labels available
+│ ├─ analyze_predictions.py # quick charts & report (optional)
+│ ├─ alerts_to_syslog.py # predictions.csv -> Syslog (batch)
+│ └─ realtime_syslog_detector.py # sniff UDP/53 -> Syslog (real time)
+├─ models/ # ML artifacts (.pkl) — NOT versioned (keep .gitkeep)
+├─ data/ # local datasets — NOT versioned (keep .gitkeep)
+├─ docs/ # detailed guides (install, pipeline, syslog, troubleshooting)
+├─ .gitignore
+├─ LICENSE
+├─ Makefile # optional quality-of-life shortcuts
+└─ CHANGELOG.md
+
+
+
+> **Do not** version `data/` and `models/` (only keep `.gitkeep`).
+
+---
+
+## Requirements
+
+- Linux (Ubuntu/Debian/Kali), **Python 3.10+**
+- Root privileges to sniff packets (or `CAP_NET_RAW`)
+- In a VM (VirtualBox/VMware): **NAT** or **Bridged** interface with visible DNS traffic
+
+---
+
+## Installation
+
+```
+
+git clone https://github.com/devlopsss/dns-tunnel-detector.git
+cd dns-tunnel-detector
+python -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+
+```
+
+Quick sanity check:
+
+
+```
+python - <<'PY'
+import joblib, sklearn, pandas, numpy
+print("OK deps")
+PY
+```
+
+
+|If you use sudo, run scripts like:
+|`sudo -E env PATH="$PATH" python scripts/...`
+|to preserve the virtualenv Python.
+
+Dataset & attribution
+
+This project uses the “DNS Tunneling Queries for Binary Classification” dataset (Kaggle mirror by Saurabh Shahane, originally published on Mendeley Data):
+
+Bubnov, Yakov (2019), DNS Tunneling Queries for Binary Classification, Mendeley Data, V1, doi: 10.17632/mzn9hvdcxg.1
+
+Kaggle mirror: DNS Tunneling Queries Classification (Saurabh Shahane)
+
+Labels
+
+0 = regular domain
+
+1 = tunneled domain (DNS tunneling)
+
 Why this dataset?
 It provides labeled domain names specifically for binary classification of DNS tunneling vs regular traffic—ideal for this supervised pipeline.
 
