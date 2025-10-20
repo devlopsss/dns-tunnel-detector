@@ -1,0 +1,54 @@
+Analyse du fichier: data/predictions_test.csv
+Nombre total de lignes: 5000
+Prédits malicieux (predicted_label==1): 4005
+Prédits normaux (predicted_label==0): 995
+
+Statistiques sur proba_malicious:
+  count: 5000.0
+  mean: 0.8013319999999999
+  std: 0.3981926132507351
+  min: 0.0
+  25%: 1.0
+  50%: 1.0
+  75%: 1.0
+  max: 1.0
+  fraction probas == 1.0: 0.795, == 0.0: 0.190
+
+
+Moyennes des features par groupe predicted_label:
+                  entropy      length  max_label  avg_label_len  num_labels  alpha_ratio  digit_ratio
+predicted_label                                                                                      
+0                3.035308   12.655276   8.660302       5.719263    2.043216     0.903955     0.005929
+1                5.137500  151.885893  42.310861      21.028868    6.600250     0.778168     0.149099
+
+Top 20 qnames par proba_malicious décroissante:
+  r53957.tunnel.tuns.org  p=1.000 ent=3.58 len=22 maxl=6
+  q+aJ04nrBA.hidemyself.org  p=1.000 ent=4.35 len=25 maxl=10
+  q+aJ1InsBA.hidemyself.org  p=1.000 ent=4.35 len=25 maxl=10
+  q+aJ1YntBA.hidemyself.org  p=1.000 ent=4.44 len=25 maxl=10
+  q+aJ1onuCDT2aA0NEkzbTnzRPgWJE7aYtQhjcSmnj74ufUn8A7gp/hxI7Q0dbyW.TZAlFC1Z6Cbd25YIQDVTvUTfHLe4uOBVMUwne/S+ncAyiMZ5bc89Js78WNkclcd.paL9ODKR+d3odwwXoOoY++cZNDX944vwhPwq8OHC+BdsiayYB+.hidemyself.org  p=1.000 ent=5.82 len=193 maxl=63
+  q+aJ14nvCHKAcMCkiIhCb3eY1s8cgWt39jSJuK4299f/S5NZcxPNqyWu7f/IKc7.oU5UNQP5bZ9LPc1tqzLiNGxrucLFh6bvmcDKM2zATGuzXgW7eEIQwOHr/8OPxRJ.FGak15Xz2kxSmwj0YHmlMjPrIGwB98j5HXHU1K6Yh9QTw7S2bH.hidemyself.org  p=1.000 ent=5.81 len=193 maxl=63
+  q+aJ2InwCI74Nywtr9b/7Tu8nQJNA2RceRMuYQUxrPJiwIosa0nbsLU6nFP1olT.cRVks/OMO4SUTdgo6LjhCPMxR2DIlv93gDPzQTIs+uB8R+IZ6B77EuY7CL33VAC.AbtQfMJm/0acjpeNcmEfPSuXoj9xeKrsQxWwJf26p6vy7gj/it.hidemyself.org  p=1.000 ent=5.77 len=193 maxl=63
+  q+aJ2YnxCNp1zchUAijbP60yT1HYH1tp6g6C+4ontM6CkMie9eEsP3BoS6NqQDE.2oYHf6DHUSXHxnboZZTfb6olxPEhB/4hEYNyd3oTCN0rCfPmKpVaNLhAsQ8NunN.NP1YWhjmdkpqpqqRsXiBmIyqh8QilJrrXnDon3c3kmUqHn/3oi.hidemyself.org  p=1.000 ent=5.59 len=193 maxl=63
+  r53941.tunnel.tuns.org  p=1.000 ent=3.68 len=22 maxl=6
+  r53940.tunnel.tuns.org  p=1.000 ent=3.68 len=22 maxl=6
+  r53939.tunnel.tuns.org  p=1.000 ent=3.47 len=22 maxl=6
+  r53938.tunnel.tuns.org  p=1.000 ent=3.58 len=22 maxl=6
+  r53937.tunnel.tuns.org  p=1.000 ent=3.58 len=22 maxl=6
+  r53936.tunnel.tuns.org  p=1.000 ent=3.58 len=22 maxl=6
+  r53935.tunnel.tuns.org  p=1.000 ent=3.47 len=22 maxl=6
+  r53934.tunnel.tuns.org  p=1.000 ent=3.58 len=22 maxl=6
+  r53933.tunnel.tuns.org  p=1.000 ent=3.43 len=22 maxl=6
+  r53932.tunnel.tuns.org  p=1.000 ent=3.58 len=22 maxl=6
+  r53931.tunnel.tuns.org  p=1.000 ent=3.58 len=22 maxl=6
+  r53930.tunnel.tuns.org  p=1.000 ent=3.58 len=22 maxl=6
+Feature importances (modèle fourni):
+  length: 0.4412
+  num_labels: 0.2157
+  entropy: 0.1933
+  digit_ratio: 0.0783
+  alpha_ratio: 0.0380
+  avg_label_len: 0.0177
+  max_label: 0.0124
+  special_ratio: 0.0019
+  vowel_ratio: 0.0016
