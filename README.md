@@ -25,6 +25,7 @@ A **full** mode adds investigative features (entropy, length, character ratios) 
 ## Repository structure
 
 dns-tunnel-detector/
+<pre>
 ├─ scripts/
 │ ├─ prepare_features.py # CSV -> features
 │ ├─ train_supervised.py # features -> model/scaler
@@ -40,7 +41,7 @@ dns-tunnel-detector/
 ├─ LICENSE
 ├─ Makefile # optional quality-of-life shortcuts
 └─ CHANGELOG.md
-
+  </pre>
 
 
 > **Do not** version `data/` and `models/` (only keep `.gitkeep`).
